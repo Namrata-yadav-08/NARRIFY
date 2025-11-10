@@ -46,7 +46,7 @@ export default function Home(){
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
           <div className="flex-1">
             <h1 className="text-6xl md:text-7xl font-serif font-bold leading-tight mb-4 transform-gpu animate-hero-pop">
-              Blogify
+              Narrify
             </h1>
             <p className="text-lg text-gray-700 mb-6 max-w-xl">
               Human stories & ideas — a place to read, write, and deepen your understanding.

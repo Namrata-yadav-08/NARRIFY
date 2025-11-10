@@ -96,9 +96,9 @@ Frontend: setup and run (if present)
      REACT_APP_API_URL=http://localhost:8000
 
 4. Run dev server:
-   npm start
+   npm run dev
    or
-   yarn start
+   yarn run dev
    - The frontend will typically run at http://localhost:5173 and call backend APIs at the configured API URL.
 
 Authentication & tokens

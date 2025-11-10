@@ -28,7 +28,7 @@ export default function Navbar(){
   return (
     <nav className="bg-white shadow">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <Link to="/" className="font-serif text-2xl font-bold">Blogify</Link>
+        <Link to="/" className="font-serif text-2xl font-bold">Narrify</Link>
         <div className="space-x-4 flex items-center">
           <a href="/#posts" className="text-sm px-3 py-1 rounded hover:bg-gray-100">Start reading</a>
           <Link to="/" className="text-sm">Home</Link>
