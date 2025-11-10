@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* hero font and subtle styling */
+body { @apply bg-gray-50 text-gray-800; }
+h1, h2, h3 { font-family: ui-serif, Georgia, "Times New Roman", Times, serif; }
+
+/* --- custom animations --- */
+
+/* floating decor */
+@keyframes float {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-12px) translateX(6px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+@keyframes float-slow {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-18px) translateX(-6px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-float-slow { animation: float 6s ease-in-out infinite; }
+.animate-float-slower { animation: float 8s ease-in-out infinite; }
+
+/* subtle tilt for hero image block */
+@keyframes tilt {
+  0% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+  100% { transform: rotate(-1deg); }
+}
+.animate-tilt { animation: tilt 6s ease-in-out infinite; transform-origin: center; }
+
+/* hero pop on load */
+@keyframes hero-pop {
+  0% { opacity: 0; transform: translateY(8px) scale(.98); }
+  60% { opacity: 1; transform: translateY(-4px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-hero-pop { animation: hero-pop 700ms cubic-bezier(.2,.9,.3,1) both; }
+
+/* card entrance and subtle hover transform */
+@keyframes cardIn {
+  0% { opacity: 0; transform: translateY(10px) scale(.995); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.card-entrance { animation: cardIn 400ms ease both; will-change: transform, opacity; }
+
+/* helper slight scale classes for smoother hover */
+.hover\:scale-102:hover { transform: scale(1.02); }
+
+/* vibrant theme variables (added) */
+:root{
+  --c1: #ffb194;
+  --c2: #ffd6a5;
+  --c3: #bdb2ff;
+  --c4: #a0e9ff;
+  --c5: #c6f1d6;
+  --bg-frost: rgba(255,255,255,0.88);
+  --glass-shadow: 0 20px 40px rgba(2,6,23,0.06);
+}
+
+/* hero-card: animated floating card with soft gradient and glow */
+.hero-card{
+  position: relative;
+  overflow: visible;
+  background: linear-gradient(180deg, var(--bg-frost), rgba(250,250,255,0.85));
+  box-shadow: var(--glass-shadow);
+  border-radius: 14px;
+  transform-origin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  /* keep float and tilt animations */
+  animation: cardFloat 6s ease-in-out infinite, cardTilt 8s ease-in-out infinite;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* animated colorful ring (using pseudo-element) */
+.hero-card::after{
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 16px;
+  padding: 2px;
+  background: conic-gradient(from 0deg, var(--c1), var(--c2), var(--c3), var(--c4), var(--c5), var(--c1));
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  filter: blur(14px) saturate(120%);
+  opacity: 0.9;
+  z-index: -1;
+  animation: rotateRing 8s linear infinite;
+  pointer-events: none;
+}
+
+/* glow layer under the hero-card (::before) */
+.hero-card::before{
+  content: "";
+  position: absolute;
+  inset: -28%;
+  border-radius: 20px;
+  background: radial-gradient(circle at 20% 20%, rgba(255,186,145,0.08), transparent 10%),
+              radial-gradient(circle at 80% 80%, rgba(157,129,255,0.06), transparent 18%);
+  filter: blur(24px);
+  opacity: 0.95;
+  z-index: -2;
+  animation: hueShift 12s linear infinite;
+}
+
+/* inner content wrapper tweak for stronger contrast */
+.hero-card-inner{
+  position: relative;
+  z-index: 3;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px) saturate(120%);
+  border-radius: 10px;
+}
+
+/* animated gradient text and glow for the hero-card label */
+.hero-card-text{
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  background: linear-gradient(90deg, #ff7a59, #ffc677 25%, #9fd9c5 55%, #bda9ff 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: textMove 6s linear infinite, textGlow 3.6s ease-in-out infinite;
+  text-shadow: 0 6px 24px rgba(123,97,255,0.06);
+}
+
+/* colorful call-to-action button enhancement */
+.vibrant-cta{
+  background: linear-gradient(90deg, rgba(255,255,255,0.98), rgba(255,255,255,0.9));
+  color: #08101a;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(16,24,40,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* vibrant card accent and hover tint */
+.colorful-card{
+  border-left: 6px solid rgba(255,255,255,0.06);
+  background-image: linear-gradient(white, white), radial-gradient(circle at 8% 20%, rgba(255,186,145,0.04), transparent 12%);
+  background-origin: border-box;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.colorful-card:hover{
+  border-left-color: rgba(189,178,255,0.8);
+  box-shadow: 0 18px 50px rgba(99,102,241,0.06);
+}
+
+/* badge pulse and multicolor */
+.post-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:36px;
+  height:36px;
+  border-radius:9999px;
+  background: linear-gradient(135deg, var(--c1), var(--c3));
+  color: #ffffff;
+  font-weight:700;
+  font-size:0.9rem;
+  box-shadow: 0 8px 20px rgba(99,102,241,0.08);
+  animation: badgePulse 2.8s ease-in-out infinite;
+}
+
+/* keyframes */
+@keyframes cardFloat {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(-10px) rotate(-0.4deg) scale(1.01); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+@keyframes cardTilt {
+  0% { transform: translateY(0) rotate(-0.6deg); }
+  50% { transform: translateY(-6px) rotate(0.6deg); }
+  100% { transform: translateY(0) rotate(-0.6deg); }
+}
+@keyframes textFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+@keyframes textFade {
+  0% { opacity: 0.9; }
+  50% { opacity: 1; }
+  100% { opacity: 0.9; }
+}
+
+/* small hue animation for hero overlay (if present) */
+@keyframes hueShift {
+  0% { filter: hue-rotate(0deg) blur(24px) saturate(110%); transform: scale(1.03); }
+  50% { filter: hue-rotate(40deg) blur(20px) saturate(125%); transform: scale(1.06); }
+  100% { filter: hue-rotate(0deg) blur(24px) saturate(110%); transform: scale(1.03); }
+}
+
+/* ring rotation */
+@keyframes rotateRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* text gradient movement + glow pulse */
+@keyframes textMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes textGlow {
+  0% { text-shadow: 0 6px 20px rgba(123,97,255,0.04); transform: translateY(0); }
+  50% { text-shadow: 0 12px 38px rgba(189,178,255,0.08); transform: translateY(-2px); }
+  100% { text-shadow: 0 6px 20px rgba(123,97,255,0.04); transform: translateY(0); }
+}
+
+/* badge pulse */
+@keyframes badgePulse {
+  0% { transform: scale(1); box-shadow: 0 8px 20px rgba(99,102,241,0.06); }
+  50% { transform: scale(1.06); box-shadow: 0 18px 48px rgba(99,102,241,0.09); }
+  100% { transform: scale(1); box-shadow: 0 8px 20px rgba(99,102,241,0.06); }
+}
+
+/* keep existing animation classes below (no change) */
